@@ -1,11 +1,11 @@
 <?php
-$fejl = 0;
 $success = 'Indtast dine kontakt oplysninger herunder';
 
 if($_POST){
+    $fejl = 0;
     if(!empty($_POST["navn"])){
         $navn = $_POST["navn"];
-        if(is_numeric($navn)){
+        if(preg_match('/\d/', $navn)){
             $fejlNavn = 'Navn må kun indholde bogstaver!';
             $fejl++;
         }
@@ -28,15 +28,16 @@ if($_POST){
 
     if(!empty($_POST["emne"])){
         $emne = $_POST["emne"];
-        if(is_numeric($emne)){
+        if(preg_match('/\d/', $emne)){
             $fejlEmne = 'Emne feltet må kun indholde bogstaver og ikke tal!';
+            $fejl++;
         }
     }else{
         $fejlEmne = 'Emne feltet skal udfyldes!';
         $fejl++;
     }
 
-    if(empty($_POST["besked"])){
+    if(empty($_POST["besked"]) && strlen($_POST["besked"]) >= 50){
         $fejlBesked = 'Besked feltet må ikke være tomt';
         $fejl++;
     }
