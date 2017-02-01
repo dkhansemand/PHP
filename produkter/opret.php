@@ -39,7 +39,7 @@ if($_POST){
         $query->bindParam(":produktPris", $pris, PDO::PARAM_INT);
         if($query->execute()){
             $conn = null;
-            echo "Produkt er nu tilføjet til databasen.";
+            header('Location: ./visprodukter.php');
         }else{
             echo "Fejl. kunne ikke eksekvere SQL forspørgelsen";
         }
