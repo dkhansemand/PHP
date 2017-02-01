@@ -20,7 +20,7 @@ if($_GET){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PHP | Produkter</title>
+    <title>PHP | Produkt </title>
 </head>
 <body>
     <h1>Produkt: <?=$produkt["produktnavn"];?></h1>

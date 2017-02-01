@@ -27,16 +27,17 @@
             if($query->execute()){
                 while($produkter = $query->fetch(PDO::FETCH_ASSOC)){
         ?>
-        <tr>
-        <td><?=$produkter["id"];?></td>
-        <td><?=$produkter["produktnavn"];?></td>
-        <td><?=$produkter["produktinfo"];?></td>
-        <td><?=$produkter["produktpris"];?> kr.</td>
-        <td><a href="visprodukt.php?id=<?=$produkter['id'];?>" title="">Vis produkt</a></td>
-        </tr>
+                    <tr>
+                    <td><?=$produkter["id"];?></td>
+                    <td><?=$produkter["produktnavn"];?></td>
+                    <td><?=$produkter["produktinfo"];?></td>
+                    <td><?=$produkter["produktpris"];?> kr.</td>
+                    <td><a href="visprodukt.php?id=<?=$produkter['id'];?>" title="">Vis produkt</a></td>
+                    </tr>
         <?php
                 }
             }else{
+                $conn = null;
                 echo 'Fejl';
             }
             $conn = null;
