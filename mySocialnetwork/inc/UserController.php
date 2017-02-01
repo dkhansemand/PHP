@@ -16,5 +16,12 @@ class UserController {
         
     }
 
+    public function CheckSession()
+    {
+        
+    }
+
+    
+
 }
 
