@@ -3,11 +3,15 @@ require_once './class.mysql.php';
 
 if($_POST){
 
-
     $errCount = 0;
 
     if(!empty($_POST["produktNavn"])){
-        $navn = $_POST["produktNavn"];
+        if(preg_match('/\d/', $_POST["produktNavn"])){
+            $navn = $_POST["produktNavn"];
+        }else{
+            $errorMsgNavn = 'Produkt navn må ikke indholde tal';
+            ++$errCount;
+        }
     }else{
         $errorMsgNavn = "Produkt navn skal udfyldes.";
         ++$errCount;
@@ -42,7 +46,6 @@ if($_POST){
     }else{
         $errorMsg = '<p>Mega meget fejl, prøv igen</p>';
     }
-
 }
 
 ?>
@@ -50,7 +53,7 @@ if($_POST){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>PHP | Produkter - opret</title>
 </head>
 <body>
 <h2>Tilføj produkt</h2>
