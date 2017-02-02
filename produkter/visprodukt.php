@@ -5,7 +5,7 @@ require_once './class.mysql.php';
 
 ##Check if GET is available 
 if($_GET){
-    if(!empty($_GET["id"]) && gettype($_GET["id"]) === 'int'){ //check id ID is not empty and is type of INT
+    if(!empty($_GET["id"]) && is_numeric($_GET["id"])){ //check id ID is not empty and is numeric
         $conn = new dbconnector(); //Create an instance to connect
         $query = $conn->newQuery("SELECT id, produktnavn, produktinfo, produktpris FROM produkter WHERE id = :ID");//Prepare SQL statement befor input
         $query->bindParam(":ID", $_GET["id"], PDO::PARAM_INT);//Get input fomr URL and check param type is INT
