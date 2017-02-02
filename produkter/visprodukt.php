@@ -13,36 +13,33 @@ if($_GET){
         header('Location: ./'); //IF id is null/empty set or type of INT - redirect
     }
 
-    if(isset($_GET["addToCart"])){
-        $cartCount = count($_SESSION["cart"]);
+    ##Add to cart 
+    if(isset($_GET["addToCart"])){//If addTocart is available continue
+        $cartCount = count($_SESSION["cart"]); //Count products in cart session array
+        ##Create array with product info to add
         $produktArr = array(
                     'id' => $produkt["id"],
                     'produktNavn' => $produkt["produktnavn"],
                     'produktInfo' => $produkt["produktinfo"],
                     'produktPris' => $produkt["produktpris"]
                 );
-            
-        if($cartCount > 0){
-            $productIdArr = array();
+
+            $productIdArr = array();//Create empty array before adding curretn products in cart
+
+            ##Run thru Cart and add current produts to the above array
             for($i = 0; $i < $cartCount; $i++){
                 array_push($productIdArr, $_SESSION["cart"][$i]["id"]);
             }
 
+            ##Check if added product exists in cart and add only if it don't exist
             if(in_array($_GET["id"], $productIdArr)){
                 $productAdded = 'Produkt er allerede i kurven';  
             }else{
-                
-                array_push($_SESSION["cart"], $produktArr);
-                $productAdded = 'Produkt tilføjet til kurv.';
-                
+                array_push($_SESSION["cart"], $produktArr); //Push to cart session array
+                $productAdded = 'Produkt tilføjet til kurv.';        
             }
-        }else{
-             if(array_push($_SESSION["cart"], $produktArr)){
-                    $productAdded = 'Produkt tilføjet til kurv.';
-                }
-        }
     }
-    
+
 }else{
     header('Location: ./');//If GET is not set - redirect
 }
