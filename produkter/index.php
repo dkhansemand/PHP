@@ -1,6 +1,11 @@
 <?php
+session_start();
 
+if(!isset($_SESSION["cart"])){
+    $_SESSION["cart"] = array();
+}
 if($_GET){
+    if(isset($_GET["side"])){
         if(file_exists($_GET["side"] . '.php')){ ##Check if the page file exsists
             $page = $_GET["side"] . '.php';
         }else{
@@ -9,7 +14,9 @@ if($_GET){
     }else{
         $page = 'visprodukter.php';
     }
-
+}else{
+        $page = 'visprodukter.php';
+    }
 ?>
 
 <!DOCTYPE html>
