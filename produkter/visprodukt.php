@@ -1,8 +1,6 @@
 <?php
-
 ## Import class for mysql connection (via PDO)
 require_once './class.mysql.php';
-
 ##Check if GET is available 
 if($_GET){
     if(!empty($_GET["id"]) && is_numeric($_GET["id"])){ //check id ID is not empty and is numeric
@@ -14,7 +12,6 @@ if($_GET){
     }else{
         header('Location: ./'); //IF id is null/empty set or type of INT - redirect
     }
-
     if(isset($_GET["addToCart"])){
         $cartCount = count($_SESSION["cart"]);
         $produktArr = array(
@@ -25,17 +22,18 @@ if($_GET){
                 );
             
         if($cartCount > 0){
-
+            $productIdArr = array();
             for($i = 0; $i < $cartCount; $i++){
-                if(!array_search($_GET["id"], $_SESSION["cart"][$i])){
-                    
-                    if(array_push($_SESSION["cart"], $produktArr)){
-                        $productAdded = 'Produkt tilføjet til kurv.';
-                    }
-                    break;
-                }else{
-                    $productAdded = 'Produkt er allerede i kurven';
-                }
+                array_push($productIdArr, $_SESSION["cart"][$i]["id"]);
+            }
+            
+            if(in_array($_GET["id"], $productIdArr)){
+                $productAdded = 'Produkt er allerede i kurven';  
+            }else{
+                
+                array_push($_SESSION["cart"], $produktArr);
+                $productAdded = 'Produkt tilføjet til kurv.';
+                
             }
         }else{
              if(array_push($_SESSION["cart"], $produktArr)){
@@ -43,11 +41,9 @@ if($_GET){
                 }
         }
     }
-
 }else{
     header('Location: ./');//If GET is not set - redirect
 }
-
 ?>
     <h3><?=@$productAdded;?></h3>
     <table border=1>
