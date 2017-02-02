@@ -1,8 +1,9 @@
 <?php
+    ## Import class for mysql connection (via PDO)
     require_once './class.mysql.php';
 
-    $conn = new dbconnector();
-    $query = $conn->newQuery("SELECT id, produktnavn, produktinfo, produktpris FROM produkter");
+    $conn = new dbconnector(); //Create an instance to connect
+    $query = $conn->newQuery("SELECT id, produktnavn, produktinfo, produktpris FROM produkter");//Define SELECT query
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +25,8 @@
     </thead>
     <tbody> 
         <?php
-            if($query->execute()){
-                while($produkter = $query->fetch(PDO::FETCH_ASSOC)){
+            if($query->execute()){ //If statement can be executed
+                while($produkter = $query->fetch(PDO::FETCH_ASSOC)){ //Store fetched rows in variable products as ASSOC Array
         ?>
                     <tr>
                     <td><?=$produkter["id"];?></td>
@@ -36,11 +37,12 @@
                     </tr>
         <?php
                 }
+                $conn = null; //Close connection on success
             }else{
-                $conn = null;
+                ##If state is not able to be executed
+                $conn = null; //Close connection on error
                 echo 'Fejl';
             }
-            $conn = null;
         ?>
     </tbody>
 </table>
