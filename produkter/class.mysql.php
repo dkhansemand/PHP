@@ -30,28 +30,6 @@ class dbconnector {
         }
     }
 
-    public function getDataFromQuery($query){
-        if(isset($query)){
-            try{
-                $conn = $this->newPDOConn();
-                $query = $conn->prepare($query);
-                $data = array();
-                if($query->execute()){
-                    while($dataFetched = $query->fetch(PDO::FETCH_ASSOC)){
-                        array_push($data, $dataFetched);
-                    }
-                    $conn = null;
-                    return $data;
-                }
-            }catch(PDOExecption $err){
-                $conn = null;
-                return $err;
-            }
-        }else{
-            echo "The query is empty!";
-        }
-    }
-
     public function newQuery($input){
          try{
             $conn = $this->newPDOConn();
