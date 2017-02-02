@@ -5,13 +5,7 @@
     $conn = new dbconnector(); //Create an instance to connect
     $query = $conn->newQuery("SELECT id, produktnavn, produktinfo, produktpris FROM produkter");//Define SELECT query
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PHP | Produkter</title>
-</head>
-<body>
+
 <h1>Produkter i database</h1>
 <table border="1">
     <thead>
@@ -33,7 +27,7 @@
                     <td><?=$produkter["produktnavn"];?></td>
                     <td><?=$produkter["produktinfo"];?></td>
                     <td><?=$produkter["produktpris"];?> kr.</td>
-                    <td><a href="visprodukt.php?id=<?=$produkter['id'];?>" title="">Vis produkt</a></td>
+                    <td><a href="?side=visprodukt&id=<?=$produkter['id'];?>" title="">Vis produkt</a></td>
                     </tr>
         <?php
                 }
@@ -46,6 +40,3 @@
         ?>
     </tbody>
 </table>
-    
-</body>
-</html>

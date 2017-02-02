@@ -12,20 +12,12 @@ if($_GET){
         $query->execute();
         $produkt = $query->fetch(PDO::FETCH_ASSOC); //Create array with row
     }else{
-        header('Location: ./visprodukter.php'); //IF id is null/empty set or type of INT - redirect
+        header('Location: ./'); //IF id is null/empty set or type of INT - redirect
     }
 }else{
-    header('Location: ./visprodukter.php');//If GET is not set - redirect
+    header('Location: ./');//If GET is not set - redirect
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PHP | Produkt </title>
-</head>
-<body>
-
     <table border=1>
         <thead>
             <tr>
@@ -42,6 +34,4 @@ if($_GET){
         </tr>
         </tbody>
     </table>
-    <a href="visprodukter.php">Tilbage</a>
-</body>
-</html>
+

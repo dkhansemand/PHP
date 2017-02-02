@@ -39,7 +39,7 @@ if($_POST){
         $query->bindParam(":produktPris", $pris, PDO::PARAM_INT);
         if($query->execute()){
             $conn = null;
-            header('Location: ./visprodukter.php');
+            $success = "Produkt tilføjet";
         }else{
             echo "Fejl. kunne ikke eksekvere SQL forspørgelsen";
         }
@@ -49,20 +49,13 @@ if($_POST){
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PHP | Produkter - opret</title>
-</head>
-<body>
+
 <h2>Tilføj produkt</h2>
+<p><?=@$success;?></p>
         <form action="" method="POST">
-        <label for="">Produkt navn</label><input type="text" name="produktNavn" placeholder="Navn"><p><?=@$errorMsgNavn;?></p>
-        <label for="">produkt info</label><input type="text" name="produktInfo" placeholder="Info"><p><?=@$errorMsgInfo;?></p>
-        <label for="">produkt pris</label><input type="text" name="produktPris" placeholder="Pris"><p><?=@$errorMsgPris;?></p>
-        <button type="submit">Tilføj</button>
+            <label for="">Produkt navn</label><input type="text" name="produktNavn" placeholder="Navn"><p><?=@$errorMsgNavn;?></p>
+            <label for="">produkt info</label><input type="text" name="produktInfo" placeholder="Info"><p><?=@$errorMsgInfo;?></p>
+            <label for="">produkt pris</label><input type="text" name="produktPris" placeholder="Pris"><p><?=@$errorMsgPris;?></p>
+            <button type="submit">Tilføj</button>
         </form>
         <?=@$errorMsg;?>
-</body>
-</html>
