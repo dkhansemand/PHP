@@ -15,29 +15,31 @@ if($_GET){
 
     ##Add to cart 
     if(isset($_GET["addToCart"])){//If addTocart is available continue
+
         $cartCount = count($_SESSION["cart"]); //Count products in cart session array
+
         ##Create array with product info to add
         $produktArr = array(
-                    'id' => $produkt["id"],
-                    'produktNavn' => $produkt["produktnavn"],
-                    'produktInfo' => $produkt["produktinfo"],
-                    'produktPris' => $produkt["produktpris"]
-                );
+                            'id' => $produkt["id"],
+                            'produktNavn' => $produkt["produktnavn"],
+                            'produktInfo' => $produkt["produktinfo"],
+                            'produktPris' => $produkt["produktpris"]
+                        );
 
-            $productIdArr = array();//Create empty array before adding curretn products in cart
+        $productIdArr = array();//Create empty array before adding curretn products in cart
 
-            ##Run thru Cart and add current produts to the above array
-            for($i = 0; $i < $cartCount; $i++){
-                array_push($productIdArr, $_SESSION["cart"][$i]["id"]);
-            }
+        ##Run thru Cart and add current produts to the above array
+        for($i = 0; $i < $cartCount; $i++){
+            array_push($productIdArr, $_SESSION["cart"][$i]["id"]);
+        }
 
-            ##Check if added product exists in cart and add only if it don't exist
-            if(in_array($_GET["id"], $productIdArr)){
-                $productAdded = 'Produkt er allerede i kurven';  
-            }else{
-                array_push($_SESSION["cart"], $produktArr); //Push to cart session array
-                $productAdded = 'Produkt tilføjet til kurv.';        
-            }
+        ##Check if added product exists in cart and add only if it don't exist
+        if(in_array($_GET["id"], $productIdArr)){
+            $productAdded = 'Produkt er allerede i kurven';  
+        }else{
+            array_push($_SESSION["cart"], $produktArr); //Push to cart session array
+            $productAdded = 'Produkt tilføjet til kurv.';        
+        }
     }
 
 }else{
