@@ -6,7 +6,7 @@ if($_POST){
     $errCount = 0;
 
     if(!empty($_POST["produktNavn"])){
-        if(preg_match('/\d/', $_POST["produktNavn"])){
+        if(!preg_match('/\d/', $_POST["produktNavn"])){
             $navn = $_POST["produktNavn"];
         }else{
             $errorMsgNavn = 'Produkt navn må ikke indholde tal';

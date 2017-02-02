@@ -12,6 +12,7 @@ if($_GET){
     }else{
         header('Location: ./'); //IF id is null/empty set or type of INT - redirect
     }
+
     if(isset($_GET["addToCart"])){
         $cartCount = count($_SESSION["cart"]);
         $produktArr = array(
@@ -26,7 +27,7 @@ if($_GET){
             for($i = 0; $i < $cartCount; $i++){
                 array_push($productIdArr, $_SESSION["cart"][$i]["id"]);
             }
-            
+
             if(in_array($_GET["id"], $productIdArr)){
                 $productAdded = 'Produkt er allerede i kurven';  
             }else{
@@ -41,6 +42,7 @@ if($_GET){
                 }
         }
     }
+    
 }else{
     header('Location: ./');//If GET is not set - redirect
 }
