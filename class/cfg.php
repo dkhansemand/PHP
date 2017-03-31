@@ -5,6 +5,7 @@
 		define('_DB_USERNAME_', 'root');
 		define('_DB_PASSWORD_', '');
 		define('_DB_NAME_', 'slipseknuden');
+		define('_LOG_PATH_', './log/');
 
     ## CLass autoloader
     function classLoader($className)

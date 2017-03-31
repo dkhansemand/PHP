@@ -4,7 +4,6 @@ namespace Log;
 
 interface Log {
     
-    public function setLogPath($dir);
-    public function getLogPath();
+    public function logError($errCocde, $errLogBy, $errMsg);
 
 }
