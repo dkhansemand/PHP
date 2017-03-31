@@ -1,21 +1,20 @@
 <?php
 
-    ## Define globals
-		define('_DB_HOST_', 'localhost');
-		define('_DB_USERNAME_', 'root');
-		define('_DB_PASSWORD_', '');
-		define('_DB_NAME_', 'slipseknuden');
-		define('_LOG_PATH_', './log/');
+	## Define globals
+	define('_DB_HOST_', 'localhost');
+	define('_DB_USERNAME_', 'root');
+	define('_DB_PASSWORD_', '');
+	define('_DB_NAME_', 'slipseknuden');
+	define('_LOG_PATH_', './log/');
 
-    ## CLass autoloader
-    function classLoader($className)
-    {
-	    $className = str_replace('\\', '/', $className);
-	    if(file_exists(__DIR__ .'/Classes/'. $className . '.php')){
-	      require_once __DIR__ .'/Classes/'. $className . '.php';
-	    } else {
-	      echo 'ERROR: '. __DIR__ .'/Classes/'. $className . '.php';
-	    }
+	## CLass autoloader
+	function classLoader($className){
+		$className = str_replace('\\', '/', $className);
+		if(file_exists(__DIR__ .'/Classes/'. $className . '.php')){
+			require_once __DIR__ .'/Classes/'. $className . '.php';
+		} else {
+			echo 'ERROR: '. __DIR__ .'/Classes/'. $className . '.php';
+		}
 	}
 	spl_autoload_register('classLoader');
 

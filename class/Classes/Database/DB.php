@@ -33,13 +33,10 @@ class DB extends \PDO implements \Log\Log{
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
             );
             $this->conn = parent::__construct("mysql:host=$host;dbname=$db;charset=utf8", $username, $password, $pdoOptions);
-            //return $this->conn;
         }catch(\PDOException $err){
             self::logError($err->getCode(), 'System\PDO', $err->getMessage());
             echo 'Error logged!';
             exit;
-        }finally{
-            unset($conn);
         }
 
     }
@@ -48,7 +45,8 @@ class DB extends \PDO implements \Log\Log{
         return $this->prepare($query);
     }
 
-    public function getValue(){
-        return $this->value;
+    public function close(){
+        unset($this->conn);
     }
+
 }
