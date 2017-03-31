@@ -7,7 +7,7 @@ use \Log;
 class DB extends \PDO implements \Log\Log{
 
     private $conn;
-    private $logPath = '';
+    private $logPath;
 
     public function setLogPath($dir){
         $this->logPath = $dir;
@@ -22,13 +22,12 @@ class DB extends \PDO implements \Log\Log{
         
         try{
             $pdoOptions = array(
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
             );
             $this->conn = parent::__construct("mysql:host=$host;dbname=$db;charset=utf8", $username, $password, $pdoOptions);
-            return $this->conn;
-        }catch(PDOException $err){
+            //return $this->conn;
+        }catch(\PDOException $err){
             echo '[PDO][ERROR]: ' . $err->getMessage();
-            
             exit;
         }finally{
             unset($conn);
@@ -36,7 +35,10 @@ class DB extends \PDO implements \Log\Log{
 
     }
 
-    public function 
+    public function prepQuery($query){
+        $prepare = $this->prepare($query);
+        return $prepare;
+    }
 
     public function getValue(){
         return $this->value;

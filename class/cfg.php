@@ -22,4 +22,14 @@
 
 	$conn = new DB(_DB_HOST_, _DB_USERNAME_, _DB_PASSWORD_, _DB_NAME_);
 
-	echo '<br><p>Function from DB with Log implement: ' . $conn->getLogPath() . '</p><br';
+	$id = 0;
+	$sql = $conn->prepQuery("SELECT * FROM users WHERE userRole = :ROLE");
+	$sql->bindParam(':ROLE', $id, PDO::PARAM_INT);
+		if($sql->execute()){
+				$data = $sql->fetchAll(PDO::FETCH_ASSOC);
+				echo '<pre>';
+				print_r($data);
+				echo '</pre>';
+		}
+
+
