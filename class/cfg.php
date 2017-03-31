@@ -3,7 +3,7 @@
     ## Define globals
 		define('_DB_HOST_', 'localhost');
 		define('_DB_USERNAME_', 'root');
-		define('_DB_PASSWORD_', '1234');
+		define('_DB_PASSWORD_', '');
 		define('_DB_NAME_', 'slipseknuden');
 
     ## CLass autoloader
@@ -21,3 +21,5 @@
   use Database\DB;
 
 	$conn = new DB(_DB_HOST_, _DB_USERNAME_, _DB_PASSWORD_, _DB_NAME_);
+
+	echo '<br><p>Function from DB with Log implement: ' . $conn->getLogPath() . '</p><br';
