@@ -11,18 +11,18 @@ class DB extends \PDO implements \Log\Log{
     public function logError($errCode, $errLogBy, $errMsg){
         $timestamp = date("d-m-Y H:i:s");
         $date = date("d-m-y");
-        $fullPath = _LOG_PATH_ . 'error_'.$date.'.log';
+        $logPath = _LOG_PATH_ . 'error_'.$date.'.log';
        // print_r(self::getLogPath());
         $logEntry = '[' . $timestamp . '][' . $errCode . '][' . $errLogBy . '] - ' . $errMsg . PHP_EOL;
-        if(file_exists($fullPath)){
+        if(file_exists($logPath)){
             ## Log for the current date exsist, add new log entry.
-            file_put_contents($fullPath, $logEntry, FILE_APPEND) or die("Not able to write logentry to file");
+            file_put_contents($logPath, $logEntry, FILE_APPEND) or die("Not able to write logentry to file");
         }else{
             ## Log for the current date does not exsist, create it first. Then add new log entry
-            if(fopen($fullPath, 'w')){
-                file_put_contents($fullPath, $logEntry, FILE_APPEND) or die("Not able to write logentry to file");
+            if(fopen($logPath, 'w')){
+                file_put_contents($logPath, $logEntry, FILE_APPEND) or die("Not able to write logentry to file");
             }else{
-                echo 'Not able to create file // ' . $fullPath . 'error_'.$date.'.log';
+                echo 'Not able to create file // ' . $logPath . 'error_'.$date.'.log';
             } 
         }
     }
@@ -35,7 +35,7 @@ class DB extends \PDO implements \Log\Log{
             $this->conn = parent::__construct("mysql:host=$host;dbname=$db;charset=utf8", $username, $password, $pdoOptions);
         }catch(\PDOException $err){
             self::logError($err->getCode(), 'System\PDO', $err->getMessage());
-            echo 'Error logged!';
+            echo 'Error logged, check logfile!';
             exit;
         }
 
