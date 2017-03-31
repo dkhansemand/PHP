@@ -23,12 +23,14 @@
 	$conn = new DB(_DB_HOST_, _DB_USERNAME_, _DB_PASSWORD_, _DB_NAME_);
 
 	$id = 0;
-	$sql = $conn->prepQuery("SELECT * FROM users WHERE userRole = :ROLE");
-	$sql->bindParam(':ROLE', $id, PDO::PARAM_INT);
+	$sql = $conn->prepQuery("SELECT * FROM users");
 		if($sql->execute()){
-				$data = $sql->fetchAll(PDO::FETCH_ASSOC);
+				$data = $sql->fetchAll(PDO::FETCH_OBJ);
 				echo '<pre>';
-				print_r($data);
+				foreach($data as $val){
+						print_r($val->userName . '<br>');
+				}
+				#print_r($data);
 				echo '</pre>';
 		}
 

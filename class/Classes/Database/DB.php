@@ -12,15 +12,15 @@ class DB extends \PDO implements \Log\Log{
         $timestamp = date("d-m-Y H:i:s");
         $date = date("d-m-y");
         $logPath = _LOG_PATH_ . 'error_'.$date.'.log';
-       // print_r(self::getLogPath());
         $logEntry = '[' . $timestamp . '][' . $errCode . '][' . $errLogBy . '] - ' . $errMsg . PHP_EOL;
+
         if(file_exists($logPath)){
             ## Log for the current date exsist, add new log entry.
-            file_put_contents($logPath, $logEntry, FILE_APPEND) or die("Not able to write logentry to file");
+            file_put_contents($logPath, $logEntry, FILE_APPEND) or die("Not able to write log entry to file");
         }else{
             ## Log for the current date does not exsist, create it first. Then add new log entry
             if(fopen($logPath, 'w')){
-                file_put_contents($logPath, $logEntry, FILE_APPEND) or die("Not able to write logentry to file");
+                file_put_contents($logPath, $logEntry, FILE_APPEND) or die("Not able to write log entry to file");
             }else{
                 echo 'Not able to create file // ' . $logPath . 'error_'.$date.'.log';
             } 
